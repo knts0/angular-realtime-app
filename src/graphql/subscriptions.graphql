@@ -1,4 +1,82 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateChat {
+  onCreateChat {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateChat {
+  onUpdateChat {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteChat {
+  onDeleteChat {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCustomer {
+  onCreateCustomer {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCustomer {
+  onUpdateCustomer {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCustomer {
+  onDeleteCustomer {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateOperator {
+  onCreateOperator {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateOperator {
+  onUpdateOperator {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteOperator {
+  onDeleteOperator {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateRestaurant {
   onCreateRestaurant {
     id

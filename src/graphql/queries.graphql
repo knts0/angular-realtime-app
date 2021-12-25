@@ -1,4 +1,77 @@
 # this is an auto generated file. This will be overwritten
+query GetChat($id: ID!) {
+  getChat(id: $id) {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+query ListChats(
+  $filter: ModelChatFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listChats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      fromId
+      toId
+      message
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCustomer($id: ID!) {
+  getCustomer(id: $id) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+query ListCustomers(
+  $filter: ModelCustomerFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetOperator($id: ID!) {
+  getOperator(id: $id) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+query ListOperators(
+  $filter: ModelOperatorFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOperators(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetRestaurant($id: ID!) {
   getRestaurant(id: $id) {
     id

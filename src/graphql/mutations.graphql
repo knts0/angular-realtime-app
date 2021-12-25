@@ -1,4 +1,109 @@
 # this is an auto generated file. This will be overwritten
+mutation CreateChat(
+  $input: CreateChatInput!
+  $condition: ModelChatConditionInput
+) {
+  createChat(input: $input, condition: $condition) {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateChat(
+  $input: UpdateChatInput!
+  $condition: ModelChatConditionInput
+) {
+  updateChat(input: $input, condition: $condition) {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteChat(
+  $input: DeleteChatInput!
+  $condition: ModelChatConditionInput
+) {
+  deleteChat(input: $input, condition: $condition) {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateCustomer(
+  $input: CreateCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  createCustomer(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCustomer(
+  $input: UpdateCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  updateCustomer(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCustomer(
+  $input: DeleteCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  deleteCustomer(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateOperator(
+  $input: CreateOperatorInput!
+  $condition: ModelOperatorConditionInput
+) {
+  createOperator(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateOperator(
+  $input: UpdateOperatorInput!
+  $condition: ModelOperatorConditionInput
+) {
+  updateOperator(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteOperator(
+  $input: DeleteOperatorInput!
+  $condition: ModelOperatorConditionInput
+) {
+  deleteOperator(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateRestaurant(
   $input: CreateRestaurantInput!
   $condition: ModelRestaurantConditionInput
