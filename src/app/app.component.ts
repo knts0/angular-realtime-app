@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Subscription } from 'rxjs';
 import {APIService, Restaurant} from "./API.service";
 
 @Component({
@@ -11,6 +12,8 @@ export class AppComponent implements OnInit {
   title = 'realtime';
 
   createForm: FormGroup;
+
+  private subscription: Subscription | null = null;
 
   restaurants: Array<Restaurant> = [];
 
@@ -27,6 +30,20 @@ export class AppComponent implements OnInit {
     this.api.ListRestaurants().then((event) => {
       this.restaurants = event.items as Restaurant[];
     });
+
+    this.subscription = <Subscription>(
+      this.api.OnCreateRestaurantListener.subscribe((event: any) => {
+        const newRestaurant = event.value.data.onCreateRestaurant;
+        this.restaurants = [newRestaurant, ...this.restaurants];
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.subscription = null;
   }
 
   public onCreate(restaurant: Restaurant) {
