@@ -2,7 +2,7 @@ type Chat @model {
   id: ID!
   fromId: ID!
   toId: ID!
-  message: ID!
+  message: String!
 }
 
 type Subscription {
