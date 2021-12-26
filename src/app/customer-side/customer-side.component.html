@@ -1,0 +1,10 @@
+<div class="message-list">
+  <div
+    *ngFor="let message of messages"
+    class="message"
+    [class.message--my]="message.fromId === myId"
+  >
+    <div>{{ message.fromId }}</div>
+    <div>{{ message.message }}</div>
+  </div>
+</div>
