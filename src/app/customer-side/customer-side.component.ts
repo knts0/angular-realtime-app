@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import * as dayjs from 'dayjs'
 import { Subscription } from 'rxjs';
 
 import { APIService, Chat, CreateChatInput } from '../API.service'
@@ -25,8 +26,16 @@ export class CustomerSideComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.ListChats().then((event) => {
-      this.messages = event.items as Chat[];
+    const filteringCondition = {
+      or: [
+        { toId: { eq: this.myId } },
+        { fromId: { eq: this.myId } },
+      ]
+    }
+    this.api.ListChats(filteringCondition).then((event) => {
+      const messages = event.items as Chat[];
+      messages.sort((a, b) => dayjs(a.createdAt).diff(b.createdAt))
+      this.messages = messages
     });
 
     this.subscription = <Subscription>(
