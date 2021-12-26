@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from '../models/message';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Subscription } from 'rxjs';
+
+import { APIService, Chat, CreateChatInput } from '../API.service'
 
 @Component({
   selector: 'app-customer-side',
@@ -10,16 +13,54 @@ export class CustomerSideComponent implements OnInit {
 
   myId = 'customer1'
 
-  messages: Message[] = [
-    { fromId: 'customer1', toId: 'operator1', message: 'テスト', createdAt: '2021-12-26 12:00:00' },
-    { fromId: 'customer1', toId: 'operator1', message: 'テスト2', createdAt: '2021-12-26 12:00:00' },
-    { fromId: 'operator1', toId: 'customer1', message: '応答テスト', createdAt: '2021-12-26 13:00:00' },
-    { fromId: 'customer1', toId: 'operator1', message: '了解です', createdAt: '2021-12-26 14:00:00' },
-  ]
+  messages: Chat[] = [];
+  messageForm: FormGroup;
 
-  constructor() { }
+  private subscription: Subscription | null = null;
+
+  constructor(private api: APIService, private fb: FormBuilder) {
+    this.messageForm = this.fb.group({
+      message: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
+    this.api.ListChats().then((event) => {
+      this.messages = event.items as Chat[];
+    });
+
+    this.subscription = <Subscription>(
+      this.api.OnCreateChatByFromIdListener(this.myId).subscribe((event: any) => {
+        const newMessage = event.value.data.onCreateChatByFromId;
+        this.messages = [...this.messages, newMessage];
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.subscription = null;
+  }
+
+  onCreate(value: { message: string }): void {
+    const createChatInput: CreateChatInput = {
+      // id?: string | null;
+      fromId: 'customer1',
+      toId: 'operator1',
+      message: value.message,
+    }
+    this.api
+      .CreateChat(createChatInput)
+      .then((event) => {
+        console.log("item created!");
+        this.messageForm.reset();
+      })
+      .catch((e) => {
+        console.log("error creating chat...", e);
+      });
+
   }
 
 }

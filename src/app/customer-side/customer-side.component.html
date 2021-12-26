@@ -1,18 +1,34 @@
-<div class="message-list">
-  <div
-    *ngFor="let message of messages"
-    class="message"
-    [class.message--my]="message.fromId === myId"
-  >
+<div class="container">
+  <div class="message-list">
     <div
-      *ngIf="message.fromId !== myId"
-      class="message-from"
-    >{{ message.fromId }}</div>
-    <div
-      class="message-body"
-      [class.message-body--my]="message.fromId === myId"
+      *ngFor="let message of messages"
+      class="message"
+      [class.message--my]="message.fromId === myId"
     >
-      {{ message.message }}
+      <div
+        *ngIf="message.fromId !== myId"
+        class="message-from"
+      >{{ message.fromId }}</div>
+      <div
+        class="message-body"
+        [class.message-body--my]="message.fromId === myId"
+      >
+        {{ message.message }}
+      </div>
     </div>
+  </div>
+  <div class="message-form-area">
+    <form
+      autocomplete="off"
+      class="message-form"
+      [formGroup]="messageForm"
+      (ngSubmit)="onCreate(messageForm.value)"
+    >
+      <div>
+        <label>メッセージ: </label>
+        <input type="text" formControlName="message" autocomplete="off" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 </div>
