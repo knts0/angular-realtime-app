@@ -17,7 +17,7 @@ export class OperatorSideComponent implements OnInit {
   messages: Chat[] = [];
   messageForm: FormGroup;
 
-  private subscription: Subscription | null = null;
+  private subscriptions: Subscription[] = [];
 
   constructor(private api: APIService, private fb: FormBuilder) {
     this.messageForm = this.fb.group({
@@ -38,19 +38,23 @@ export class OperatorSideComponent implements OnInit {
       this.messages = messages
     });
 
-    this.subscription = <Subscription>(
+    this.subscriptions.push(<Subscription>(
       this.api.OnCreateChatByFromIdListener(this.myId).subscribe((event: any) => {
         const newMessage = event.value.data.onCreateChatByFromId;
         this.messages = [...this.messages, newMessage];
       })
-    );
+    ));
+
+    this.subscriptions.push(<Subscription>(
+      this.api.OnCreateChatByToIdListener(this.myId).subscribe((event: any) => {
+        const newMessage = event.value.data.onCreateChatByToId;
+        this.messages = [...this.messages, newMessage];
+      })
+    ));
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    this.subscription = null;
+    this.subscriptions.forEach(v => v.unsubscribe());
   }
 
   onCreate(value: { message: string }): void {
