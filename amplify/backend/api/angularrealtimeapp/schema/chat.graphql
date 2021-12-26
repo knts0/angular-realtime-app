@@ -4,3 +4,8 @@ type Chat @model {
   toId: ID!
   message: ID!
 }
+
+type Subscription {
+  onCreateChatByFromId(fromId: ID!): Chat
+    @aws_subscribe(mutations: ["createChat"])
+}
