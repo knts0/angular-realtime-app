@@ -5,7 +5,29 @@
 }
 
 .message {
+  margin-bottom: 8px;
+
   &--my {
     align-self: flex-end;
+  }
+}
+
+.message-from {
+  font-size: 12px;
+
+  &--my {
+    text-align: right;
+  }
+}
+
+.message-body {
+  background-color: gray;
+  border-radius: 8px 8px 8px 0;
+  padding: 8px;
+  font-size: 14px;
+
+  &--my {
+    background-color:darkseagreen;
+    border-radius: 8px 8px 0 8px;
   }
 }

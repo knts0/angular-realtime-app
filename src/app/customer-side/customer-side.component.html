@@ -4,7 +4,15 @@
     class="message"
     [class.message--my]="message.fromId === myId"
   >
-    <div>{{ message.fromId }}</div>
-    <div>{{ message.message }}</div>
+    <div
+      *ngIf="message.fromId !== myId"
+      class="message-from"
+    >{{ message.fromId }}</div>
+    <div
+      class="message-body"
+      [class.message-body--my]="message.fromId === myId"
+    >
+      {{ message.message }}
+    </div>
   </div>
 </div>
