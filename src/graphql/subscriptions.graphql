@@ -9,6 +9,16 @@ subscription OnCreateChatByFromId($fromId: ID!) {
     updatedAt
   }
 }
+subscription OnCreateChatByToId($toId: ID!) {
+  onCreateChatByToId(toId: $toId) {
+    id
+    fromId
+    toId
+    message
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateChat {
   onCreateChat {
     id

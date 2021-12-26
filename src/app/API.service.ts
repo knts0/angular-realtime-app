@@ -11,6 +11,7 @@ export interface SubscriptionResponse<T> {
 
 export type __SubscriptionContainer = {
   onCreateChatByFromId: OnCreateChatByFromIdSubscription;
+  onCreateChatByToId: OnCreateChatByToIdSubscription;
   onCreateChat: OnCreateChatSubscription;
   onUpdateChat: OnUpdateChatSubscription;
   onDeleteChat: OnDeleteChatSubscription;
@@ -179,6 +180,16 @@ export type ListChatsQuery = {
 };
 
 export type OnCreateChatByFromIdSubscription = {
+  __typename: "Chat";
+  id: string;
+  fromId: string;
+  toId: string;
+  message: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateChatByToIdSubscription = {
   __typename: "Chat";
   id: string;
   fromId: string;
@@ -380,6 +391,32 @@ export class APIService {
       SubscriptionResponse<
         Pick<__SubscriptionContainer, "onCreateChatByFromId">
       >
+    >;
+  }
+
+  OnCreateChatByToIdListener(
+    toId: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateChatByToId">>
+  > {
+    const statement = `subscription OnCreateChatByToId($toId: ID!) {
+        onCreateChatByToId(toId: $toId) {
+          __typename
+          id
+          fromId
+          toId
+          message
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      toId
+    };
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateChatByToId">>
     >;
   }
 
