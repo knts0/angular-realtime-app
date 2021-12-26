@@ -1,4 +1,0 @@
-type Operator @model {
-  id: ID!
-  name: String!
-}
