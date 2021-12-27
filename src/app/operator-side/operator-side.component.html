@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container flex flex-col">
   <header class="header">
     オペレータ側画面
   </header>
-  <div class="message-list">
+  <div class="message-list flex-1 flex flex-col items-start">
     <div
       *ngFor="let message of messages"
       class="message"
-      [class.message--my]="message.fromId === myId"
+      [class.self-end]="message.fromId === myId"
     >
       <div
         *ngIf="message.fromId !== myId"
@@ -23,7 +23,7 @@
   <div class="message-form-area">
     <form
       autocomplete="off"
-      class="message-form"
+      class="flex"
       [formGroup]="messageForm"
       (ngSubmit)="onCreate(messageForm.value)"
     >
