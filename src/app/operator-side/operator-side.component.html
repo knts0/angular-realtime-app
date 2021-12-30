@@ -2,19 +2,33 @@
   <header class="text-xl h-12 py-2">
     オペレータ側画面
   </header>
-  <div class="message-list flex-1 flex flex-col items-start">
+  <div class="
+    flex-1
+    flex
+    flex-col
+    items-start
+    py-2
+    overflow-scroll
+  ">
     <div
       *ngFor="let message of messages"
-      class="message"
+      class="mb-2"
       [class.self-end]="message.fromId === myId"
     >
       <div
         *ngIf="message.fromId !== myId"
-        class="message-from"
+        class="text-sm"
       >{{ message.fromId }}</div>
       <div
-        class="message-body"
-        [class.message-body--my]="message.fromId === myId"
+        class="
+          bg-gray-200
+          rounded-t-lg
+          p-2
+          text-base
+        "
+        [class.bg-green-400]="message.fromId === myId"
+        [class.rounded-br-lg]="message.fromId !== myId"
+        [class.rounded-bl-lg]="message.fromId === myId"
       >
         {{ message.message }}
       </div>
