@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { CustomerSideComponent } from './customer-side/customer-side.component';
 import { OperatorSideComponent } from './operator-side/operator-side.component';
 import { TopComponent } from './top/top.component';
+import { ControlValueAccessorComponent } from './control-value-accessor/control-value-accessor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerSideComponent,
     OperatorSideComponent,
-    TopComponent
+    TopComponent,
+    ControlValueAccessorComponent
   ],
   imports: [
     BrowserModule,
